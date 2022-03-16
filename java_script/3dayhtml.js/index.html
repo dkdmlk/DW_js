@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .popup {
+        width: 800px;
+        height: 300px;
+        background-color: #777;
+        margin: 100px auto;
+        position: relative;
+      }
+      .close {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        top: 5px;
+        right: 5px;
+        background-color: red;
+        cursor: pointer;
+      }
+      .container {
+        width: 500px;
+        height: 200px;
+        margin: 5px auto;
+      }
+      button {
+        padding: 3%;
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="popup" id="Popup">
+      <div class="close" onclick="closePopup()"></div>
+    </div>
+    <div class="container">
+      <button onclick="block()">확인</button>
+    </div>
+    <script>
+      function closePopup() {
+        //바닐라js문법
+        document.getElementById('Popup').style.display = 'none';
+      }
+      function block() {
+        var display = document.getElementById('Popup').style.display;
+        // A == B  : A는 B와 같다.
+        // A === B : A와 B는 같고 자료형도 같다.
+        // var a = "1"; var a1 = 1;
+        // a == a1 true / a===a1 false
+        if (display == 'none') {
+          document.getElementById('Popup').style.display = 'block';
+          return 0;
+        }
+      }
+    </script>
+  </body>
+</html>

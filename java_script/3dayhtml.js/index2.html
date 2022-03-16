@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .popup {
+        width: 800px;
+        height: 300px;
+        background-color: #777;
+        margin: 100px auto;
+        position: relative;
+      }
+      .close {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        top: 5px;
+        right: 5px;
+        background-color: red;
+        cursor: pointer;
+      }
+      .container {
+        width: 500px;
+        height: 200px;
+        margin: 5px auto;
+      }
+      button {
+        padding: 3%;
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="popup" id="Popup">
+      <div class="close" onclick="closePopup()"></div>
+    </div>
+    <div class="container">
+      <button onclick="block()">확인</button>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <!-- 제이쿼리 BEST 장점 
+        1. 비동기 통신 지원
+        2. 같은 코드를 짧은 코드로 지원
+        3. 구버전 브라우저 지원
+    -->
+    <script>
+      function closePopup() {
+        //document.getElementById('Popup').style.display = 'none';
+        $('#Popup').hide();
+        //$('#Popup').css('display', 'none');
+        //class 이름이 container 인 태그안에 해당 태그를 추가해라!
+        $('.container').append('<button onclick="block()">취소</button>');
+      }
+      function block() {
+        //var display = document.getElementById('Popup').style.display;
+        var style = $('#Popup').css('display');
+        if (style === 'none') {
+          //   document.getElementById('Popup').style.display = 'block';
+          $('#Popup').show();
+          $('#Popup').css('display', 'block');
+          return 0;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -12,18 +12,18 @@
       <h1>로그인</h1>
       <div class="login-form">
         <div class="txt-field">
-          <input type="text" required />
+          <input type="text" required id="userId"/>
           <label>아이디</label>
         </div>
         <div class="txt-field">
-          <input type="password" required />
+          <input type="password" required id="password"/>
           <label>비밀번호</label>
         </div>
         <div class="pass">
           <label for="login-status">로그인 상태 유지</label>
           <input type="checkbox" id="login-status" value="stay" />
         </div>
-        <input class="login-btn" type="butten" value="로그인" />
+        <input class="login-btn" type="butten" value="로그인" onclick="loginButten()"/>
         <div class="signup-link">회원이 아닌가요? <a href="#">회원가입</a></div>
       </div>
     </div>
@@ -47,6 +47,44 @@
         5번 문제: 로그인 상태 유지를 누르면 
         '해당 브라우저에 로그인 정보를 저장하시겠습니까?' 라는 confirm창 띄우기
         */
+       function loginButten(){
+         //1번 2번문제
+         var userId = $('#userId').val().trim();
+         var password = $('#password').val().trim();
+        if(userId =='' || password ==''){
+          $('#userId').val('');
+          $('#userId').focus();
+          $('#password').val('');
+          $('#password').focus();
+          return false
+        }
+        else{
+          alert('로그인완료');
+        }
+        //3번 문제
+        if(userId.lenght > 30){
+          alert('유저아이디는 30글자 이하로 입력해주세요');
+          $('#userId').val('');
+          $('#userId').focus();
+          return false;
+        }
+        if(password.lenght > 30){
+          alert('비밀번호는 30글자 이하로입력해주세요')
+          $('#password').val('');
+          $('#password').focus();
+          return false
+        }
+      }
+      // 4번 문제
+      $("input[type=text]").filter("#userId").on("keyup", function(){
+      $(this).val($(this).val().toLowerCase());
+      });
+      //5번문제
+      $('#login-status').click(function(){
+        if($('#login-status').prop('checked',true)){
+          confirm('해당 브라우저에 로그인 정보를 저장하시겠습니까?')
+        }
+      })
     </script>
   </body>
 </html>

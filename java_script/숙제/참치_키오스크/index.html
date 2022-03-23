@@ -70,7 +70,9 @@
       </div>
       <div class="footer">
         <div class="order">
-          <button type="button" id="paymentButton" onclick="paymentButton">결제하기</button>
+          <button type="button" id="paymentButton" onclick="paymentButton">
+            결제하기
+          </button>
           <p>총 주문 금액 : <span class="orderSpan">0</span></p>
         </div>
       </div>
@@ -103,102 +105,91 @@
       '주문한 참치는 참다랑어 뱃살 8일 숙성 2개, 참다랑어 등살 3일 숙성1개 입니다.
       주문하시겠습니까?' 라는 confirm창 띄우기
       */
-     //1번문제
+      //1번문제
       function menu() {
-        $('.menu-1').css('background-color','#ffffff').css('color','#4e4e4e')
-        $('.menu-2').css('background-color', '#c24040').css('color','#fff')
-        $('.menu-3').css('background-color', '#c24040').css('color','#fff')
+        $('.menu-1').css('background-color', '#ffffff').css('color', '#4e4e4e');
+        $('.menu-2').css('background-color', '#c24040').css('color', '#fff');
+        $('.menu-3').css('background-color', '#c24040').css('color', '#fff');
       }
       function menu2() {
-        $('.menu-2').css('background-color','#ffffff').css('color','#4e4e4e')
-        $('.menu-1').css('background-color', '#c24040').css('color','#fff')
-        $('.menu-3').css('background-color', '#c24040').css('color','#fff')
+        $('.menu-2').css('background-color', '#ffffff').css('color', '#4e4e4e');
+        $('.menu-1').css('background-color', '#c24040').css('color', '#fff');
+        $('.menu-3').css('background-color', '#c24040').css('color', '#fff');
       }
       function menu3() {
-        $('.menu-3').css('background-color','#ffffff').css('color','#4e4e4e')
-        $('.menu-1').css('background-color', '#c24040').css('color','#fff')
-        $('.menu-2').css('background-color', '#c24040').css('color','#fff')
+        $('.menu-3').css('background-color', '#ffffff').css('color', '#4e4e4e');
+        $('.menu-1').css('background-color', '#c24040').css('color', '#fff');
+        $('.menu-2').css('background-color', '#c24040').css('color', '#fff');
       }
       //2번
-      $('#put1').on('click', function(){
-        var payment = $('.orderSpan').text().replace(",","");
+      $('#put1').on('click', function () {
+        var payment = $('.orderSpan').text().replace(',', '');
         payment = parseInt(payment);
-        var putmenu1 = $('#menu1').text().replace(",","");
+        var putmenu1 = $('#menu1').text().replace(',', '');
         putmenu1 = parseInt(putmenu1);
-        $('.orderSpan').html(payment+=putmenu1);
-        var infomenu1 = $('#menu-info1>h6').text() +" " +$('#spanmenu1').text();
-        console.log(infomenu1)
-      })
-      $('#put2').on('click', function(){
-        var payment = $('.orderSpan').text().replace(",","");
-        payment = parseInt(payment)
-        var putmenu2 = $('#menu2').text().replace(",","");
+        $('.orderSpan').html((payment += putmenu1));
+      });
+      $('#put2').on('click', function () {
+        var payment = $('.orderSpan').text().replace(',', '');
+        payment = parseInt(payment);
+        var putmenu2 = $('#menu2').text().replace(',', '');
         putmenu2 = parseInt(putmenu2);
-        $('.orderSpan').html(payment+=putmenu2);
-        var infomenu2 = $('#menu-info2>h6').text()+" " + $('#spanmenu2').text()
-        console.log(infomenu2)
-      })
-      $('#put3').on('click', function(){
-        var payment = $('.orderSpan').text().replace(",","");
-        payment = parseInt(payment)
-        var putmenu3 = $('#menu3').text().replace(",","");
+        $('.orderSpan').html((payment += putmenu2));
+      });
+      $('#put3').on('click', function () {
+        var payment = $('.orderSpan').text().replace(',', '');
+        payment = parseInt(payment);
+        var putmenu3 = $('#menu3').text().replace(',', '');
         putmenu3 = parseInt(putmenu3);
-        $('.orderSpan').html(payment+=putmenu3);
-        var infomenu3 = $('#menu-info3>h6').text()+" " + $('#spanmenu3').text()
-        console.log(infomenu3)
-      })
-      $('#put4').on('click', function(){
-        var payment = $('.orderSpan').text().replace(",","");
-        payment = parseInt(payment)
-        var putmenu4 = $('#menu4').text().replace(",","");
+        $('.orderSpan').html((payment += putmenu3));
+      });
+      $('#put4').on('click', function () {
+        var payment = $('.orderSpan').text().replace(',', '');
+        payment = parseInt(payment);
+        var putmenu4 = $('#menu4').text().replace(',', '');
         putmenu4 = parseInt(putmenu4);
-        $('.orderSpan').html(payment+=putmenu4);
-        var infomenu4 = $('#menu-info4>h6').text()+" " + $('#spanmenu4').text()
-        console.log(infomenu4)
-      })
+        $('.orderSpan').html((payment += putmenu4));
+      });
       //4번
-      $('a').on('click',function(){
-        var payment = $('.orderSpan').text();
-        payment = parseInt(payment)
-        if(payment > 100000){
-          $('a').off('click')
-        }
-        if(payment > 78000){
-          $('#put1').off('click')
-        }
-        if(payment > 90000){
-          $('#put2').off('click')
-        }
-        if(payment > 88000){
-          $('#put3').off('click')
-        }
-        if(payment > 84000){
-          $('#put4').off('click')
-        }
-      })
-      $('#paymentButton').on('click',function(){
+      $('a').on('click', function () {
         var payment = $('.orderSpan').text();
         payment = parseInt(payment);
+        if (payment > 100000) {
+          $('a').off('click');
+        }
+        if (payment > 78000) {
+          $('#put1').off('click');
+        }
+        if (payment > 90000) {
+          $('#put2').off('click');
+        }
+        if (payment > 88000) {
+          $('#put3').off('click');
+        }
+        if (payment > 84000) {
+          $('#put4').off('click');
+        }
+      });
+      $('#paymentButton').on('click', function () {
+        var payment = $('.orderSpan').text();
+        payment = parseInt();
         var count = 0;
-        $('#put1').click(function(){
-         ++count;
-        })
-        var infomenu1 = $('#menu-info1>h6').text() +" " +$('#spanmenu1').text() +count;
-        console.log(infomenu1)
         //3번문제
-        if(payment === 0){
-          alert('메뉴를 선택하세요!')
+        if (payment === 0) {
+          alert('메뉴를 선택하세요!');
         }
-        if(payment > 10000){//6번
-          confirm('주문한 참치는' +' 개 ' +'결제하시겠습니까?');
+        var number = 0;
+        $('#put1').on('click', function () {
+          number = parseInt(number) + 1;
+        });
+        if (payment > 10000) {
+          confirm('주문한 참치는' + ' 개 ' + '결제하시겠습니까?');
         }
-      })
+      });
       //5번문제
-      function Soldout(){
-        alert('죄송합니다. 참다랑어 세트는 품절입니다')
+      function Soldout() {
+        alert('죄송합니다. 참다랑어 세트는 품절입니다');
       }
-      var menuinfoChildren = $('.container').children();
-      console.log(menuinfoChildren)
     </script>
   </body>
 </html>

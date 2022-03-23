@@ -34,7 +34,7 @@
           />
         </div>
         <div class="btn-wrapper">
-          <button type="button" id="empBtn" onclick="btnEmp(this)">
+          <button type="button" id="empBtn" onclick="btnEmp()">
             사원 등록
           </button>
         </div>
@@ -48,7 +48,7 @@
             <div class="row"></div>
             <div class="row">
               <div class="col">
-                <table>
+                <table id="table">
                   <thead>
                     <tr role="row">
                       <th>
@@ -61,7 +61,7 @@
                       <th>Start date</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id = 'appendToBody'>
                     <tr>
                       <td id="rank1">1</td>
                       <td>홍길동</td>
@@ -121,7 +121,7 @@
       ↓을 누르면 내림차순, ↑을 누르면 오름차순으로 tr을 정렬하시오.
       */
 
-      function btnEmp(val) {
+      function btnEmp() {
         //1번문제
         var rank = $('#rank').val().trim();
         const NAME = $('#name').val().trim();
@@ -169,8 +169,11 @@
             return false;
           }
         }
-        $(tbody).append('<td></td><td></td><td></td><td></td><td></td>');
+        var array2 = new Array();
+        var html = '<tr><td>'+rank+'</td><td>'+NAME+'</td><td>'+job+'</td><td>'+loc+'</td><td>'+hiredate+'</td></tr>';
+        $('tbody').append(html);
       }
+      
     </script>
   </body>
 </html>

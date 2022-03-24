@@ -45,7 +45,7 @@
               <h6>참다랑어 등살</h6>
               <p>숙성 : <span id="spanmenu3">3일 숙성</span></p>
               <p>가격 : <span id="menu3">12,000</span></p>
-              <a href="#" id="put3">담기</a>
+              <a href="#" id="put3" >담기</a>
             </div>
           </div>
           <div class="menu">
@@ -54,7 +54,7 @@
               <h6>참다랑어 뱃살</h6>
               <p>숙성 : <span id="spanmenu4">5일 숙성</span></p>
               <p>가격 : <span id="menu4">16,000</span></p>
-              <a href="#" id="put4">담기</a>
+              <a href="#" id="put4" >담기</a>
             </div>
           </div>
           <div class="menu">
@@ -129,6 +129,12 @@
         putmenu1 = parseInt(putmenu1);
         $('.orderSpan').html((payment += putmenu1));
       });
+      function putonclick(count){
+        $('#put1').on('click', function (){
+          var count;
+          count += 1;
+        })
+      }
       $('#put2').on('click', function () {
         var payment = $('.orderSpan').text().replace(',', '');
         payment = parseInt(payment);
@@ -172,24 +178,30 @@
       });
       $('#paymentButton').on('click', function () {
         var payment = $('.orderSpan').text();
-        payment = parseInt();
-        var count = 0;
+        payment = parseInt(payment);
         //3번문제
         if (payment === 0) {
           alert('메뉴를 선택하세요!');
         }
-        var number = 0;
-        $('#put1').on('click', function () {
-          number = parseInt(number) + 1;
-        });
+        var infoButton = $('a');
+        var menu = "";
+        menu = count;
         if (payment > 10000) {
-          confirm('주문한 참치는' + ' 개 ' + '결제하시겠습니까?');
+          confirm('주문한 참치는' +menu+ ' 개 ' + '결제하시겠습니까?');
         }
       });
       //5번문제
       function Soldout() {
         alert('죄송합니다. 참다랑어 세트는 품절입니다');
       }
+      // function infoButton(type){
+      //   var infoButton = $('a')
+      //   var number = 0;
+      //   if(type === 'plus') {
+      //     number += 1
+      //   }
+      //   console.log(number);
+      // }
     </script>
   </body>
 </html>

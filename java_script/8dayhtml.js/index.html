@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(function () {
+        var jsonData = {
+          name: '포항폭탄주이모',
+          age: 40,
+          add: '포항',
+          famlily: {
+            dad: '신형만',
+            mom: '봉미선',
+          },
+        };
+        // console.log(jsonData);
+        // console.log(jsonData.name);
+        // console.log(jsonData.famlily.dad); //json안에 json 접근!
+
+        //배열안에잇는 json
+        var jsonData2 = [
+          {
+            name: '짱구',
+            famlily: {
+              dad: '신형만',
+              mom: '봉미선',
+            },
+          },
+          { name: '유리' },
+          {
+            name: '맹구',
+          }, //list로표현됨(배열의 길이)
+        ];
+        // console.log(jsonData2);
+        // console.log(jsonData2[0].famlily.dad);
+
+        //총합더하기
+        var jsonData3 = [
+          { sal: 3000 },
+          { sal: 5000 },
+          { sal: 4400 },
+          { sal: 2300 },
+        ];
+        console.log(jsonData3);
+        var sum = 0;
+        // for (var i = 0; i < jsonData3.length; ++i) {
+        //   sum += jsonData3[i].sal; //배열 sal 의숫자를더하라
+        // }
+        jsonData3.forEach(function (element) {
+          sum += element.sal;
+        });
+        // console.log(element.sal);
+        console.log(sum);
+        //버전 6 (arrow function)
+        // let sum = 0; //let은중복이안됨(var은 변수명이중복이됨)
+        // jsonData3.forEach((element)=>{
+        //     sum += element.sal;
+        // })
+        var jsonData4 = {
+          name: '보노보노',
+          addr: '보노보노송',
+          frend: ['너부리', '포로리', '어동이형'],
+          famlily: [
+            { name: '보노보노아빠', age: 34 },
+            { name: '보노보노엄마', age: 30 },
+          ],
+          hobby: '낮잠',
+        };
+        //문제 1. friend 길이를 구하시오.
+        console.log('문제1: ' + jsonData4.frend.length);
+        //문제 2. famlily나이를 합산하시오
+        var total = 0;
+        for (var i = 0; i < jsonData4.famlily.length; ++i) {
+          total += jsonData4.famlily[i].age;
+        }
+        console.log('문제2 : ' + total);
+        //문제 3. 보노보노의 취미를 낮잠에서 수영으로 변경하시오
+        jsonData4.hobby = '수영';
+        //문제 4. saying 이라는 key를 추가하고 value에 '포로리야 놀자'를추가하시오
+        jsonData4.saying = '포로리야 놀자';
+        console.log(jsonData4);
+      });
+    </script>
+  </body>
+</html>

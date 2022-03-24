@@ -61,7 +61,7 @@
                       <th>Start date</th>
                     </tr>
                   </thead>
-                  <tbody id = 'appendToBody'>
+                  <tbody id="appendToBody">
                     <tr>
                       <td id="rank1">1</td>
                       <td>홍길동</td>
@@ -153,9 +153,9 @@
           $('#hireDate').focus();
           return false;
         }
+        //2번
         var array = ['New York', 'San Francisco', 'London'];
         for (var i = 0; i < array.length; ++i) {
-          //문제2
           if ($('#loc').val() === array[0]) {
             return true;
           }
@@ -168,12 +168,36 @@
             alert('New York, San Francisco, London 중에 입력하여 주세요!');
             return false;
           }
+          //3번
         }
-        var array2 = new Array();
-        var html = '<tr><td>'+rank+'</td><td>'+NAME+'</td><td>'+job+'</td><td>'+loc+'</td><td>'+hiredate+'</td></tr>';
+        if ($('.input-wrapper').children() === 'rank' && $('#rank')) {
+          alert('이미 등록된 랭킹은 중복될 수 없습니다.');
+          $('#' + elementId).focus();
+          var isRanker = true;
+          var tbodyChildren = $('tbody').children();
+          for (var i = 0; i < tbodyChildren.length; i++) {
+            var firstTdElement = tbodyChildren[i].children[0];
+            var registeredRank = firstTdElement.innerText;
+            if (registeredRank === rank) {
+              isRanker = false;
+            }
+          }
+          return false;
+        }
+        var html =
+          '<tr><td>' +
+          rank +
+          '</td><td>' +
+          name +
+          '</td><td>' +
+          job +
+          '</td><td>' +
+          loc +
+          '</td><td>' +
+          hiredate +
+          '</td></tr>';
         $('tbody').append(html);
       }
-      
     </script>
   </body>
 </html>

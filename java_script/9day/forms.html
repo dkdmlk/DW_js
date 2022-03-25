@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      button {
+        width: 100px;
+        height: 100px;
+        font-size: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="forms">
+      <input type="text" id="email" placeholder="이메일을입력하세요." />
+      <input
+        type="text"
+        id="companyNumber"
+        placeholder="사업자등록번호를입력하세요"
+      />
+      <input type="text" id="userName" placeholder="이름을입력하세요..." />
+      <!-- input이 20개 있다고 가정 -->
+    </div>
+    <button id="btn" type="button">사업제출</button>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      //버튼클릭했을떄 이벤트를처리할수있는방법
+      //1.onclick
+      //2.$().on('click',익명함수)
+      //3.$().click(익명함수)
+      //$('#btn').on('click',function(){})//ver.5
+      //$('#btn').click(()=>{});//ver.6(Arrow function)
+      $('#btn').click(function () {
+        //ver.5
+        //console.log('Hello World');
+        //input을 체크 하는 로직 구현 예정
+        //문제1for문 완성 ->consol.log로 id출력
+        var formChildren = $('.forms').children();
+        for (var i = 0; i < formChildren.length; ++i) {
+          var value = $('#' + formChildren[i].id).val();
+          if (value === '') {
+            console.log('input값을 입력해주세요');
+            return false;
+          }
+          if (formChildren[i].id === 'email' && !doCheckEmail(value)) {
+            console.log('이메일 형식이 아닙니다.');
+            return false;
+          }
+          //doCheckEmail(value) = true, !doCheckEmail(value)=false
+          /* 위의 if문과 동일
+        if (formChildren[i].id === 'email'){
+          if(!doCheckEmail(value)){
+            console.log('이메일 형식이 아닙니다.');
+            return false;
+          }
+        }*/
+          if (
+            formChildren[i].id === 'companyNumber' &&
+            !doCheckCompanyNumber(value)
+          ) {
+            console.log('사업자 번호가 다릅니다.');
+            return false;
+          }
+        }
+        submitData();
+      });
+      /*자바스크립트 함수 특징:
+      1.리턴값 정의 x, 
+      2.호출할 때 파라미터값 optional(자유롭다)
+      3.파라미터에 함수를 사용가능(허용) 
+      4.return에 함수가 가능(클로저)   */
+
+      //이메일을 확인하다.
+      function doCheckEmail(email) {
+        var regEmail =
+          /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        isEmail = regEmail.test(email); //test라는 내장함수가 자바스크립트에 존재.
+        return isEmail; //앞에is가붙은건 bloon(true,false)형
+      }
+      //사업자등록번호를 확인하다
+      function doCheckCompanyNumber(companyNumber) {
+        /* 사업자등록번호 */
+        var regCompanyNumber = /([0-9]{3})-?([0-9]{2})-?([0-9]{5})/;
+        var isCompanyNumber = regCompanyNumber.test(companyNumber);
+        return isCompanyNumber;
+      }
+      function submitData() {
+        //data -> json
+        //json -> server(백엔드에전송)
+        //jquery ajax을 이용해서 json -> server(백엔드에 전송)
+        var jsonData = {};
+        jsonData.email = $('#email').val();
+        jsonData.companyNumber = $('#companyNumber').val();
+        jsonData.userName = $('#userName').val();
+        console.log(jsonData);
+      }
+    </script>
+  </body>
+</html>

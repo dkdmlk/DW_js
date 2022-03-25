@@ -124,20 +124,20 @@
       function btnEmp() {
         //1번문제
         var inputchildren = $('.input-wrapper').children();
-        for(var i=0; i<inputchildren.length;++i){
-            var elementId = inputchildren[i].id;
-            var elementValue = inputchildren[i].value.trim();
-            if(elementValue === ''){
-                alert('데이터를 입력해주세요!');
-                $('#'+elementId).focus();
-                return false;
-            }
-            //3번
-            if(elementId === 'rank' && !isRanker(elementValue)){
-              alert('이미 등록된 랭킹은 중복될 수 없습니다.');
-              $('#rank').focus();
-              return false;
-            }
+        for (var i = 0; i < inputchildren.length; ++i) {
+          var elementId = inputchildren[i].id;
+          var elementValue = inputchildren[i].value.trim();
+          if (elementValue === '') {
+            alert('데이터를 입력해주세요!');
+            $('#' + elementId).focus();
+            return false;
+          }
+          //3번
+          if (elementId === 'rank' && !isRanker(elementValue)) {
+            alert('이미 등록된 랭킹은 중복될 수 없습니다.');
+            $('#rank').focus();
+            return false;
+          }
         }
         //2번
         var array = ['New York', 'San Francisco', 'London'];
@@ -155,25 +155,39 @@
             return false;
           }
         }
+        setTableBody();
+      }
+      function isRanker(rank) {
+        var isRanker = true;
+        var tbodyChildren = $('tbody').children();
+        for (var i = 0; i < tbodyChildren.length; i++) {
+          var firstTdElement = tbodyChildren[i].children[0];
+          var registeredRank = firstTdElement.innerText;
+          if (registeredRank === rank) {
+            isRanker = false;
+          }
+        }
+        return isRanker;
+      }
+      function setTableBody() {
         var rank = $('#rank').val().trim();
         var name = $('#name').val().trim();
         var job = $('#job').val().trim();
         var loc = $('#loc').val().trim();
         var hiredate = $('#hiredate').val().trim();
-        var innerHtml = '<tr><td>'+rank+'</td><td>'+name+'</td><td>'+job+'</td><td>'+loc+'</td><td>'+hiredate+'</td></tr>';
+        var innerHtml =
+          '<tr><td>' +
+          rank +
+          '</td><td>' +
+          name +
+          '</td><td>' +
+          job +
+          '</td><td>' +
+          loc +
+          '</td><td>' +
+          hiredate +
+          '</td></tr>';
         $('tbody').append(innerHtml);
-      }
-      function isRanker(rank){
-        var isRanker = true;
-        var tbodyChildren = $('tbody').children();
-        for(var i=0; i<tbodyChildren.length; i++){
-            var firstTdElement = tbodyChildren[i].children[0];
-            var registeredRank = firstTdElement.innerText;
-            if(registeredRank === rank){
-              isRanker= false;
-            }
-        }
-        return isRanker;
       }
     </script>
   </body>

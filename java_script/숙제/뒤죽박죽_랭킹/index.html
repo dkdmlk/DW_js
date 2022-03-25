@@ -120,9 +120,8 @@
       ***5번 문제: (해당 문제는 할 수 있는 사람만 도전 해보시오.)
       ↓을 누르면 내림차순, ↑을 누르면 오름차순으로 tr을 정렬하시오.
       */
-
-      function btnEmp() {
-        //1번문제
+      //1번
+      $('#signUp').on('click', function () {
         var inputchildren = $('.input-wrapper').children();
         for (var i = 0; i < inputchildren.length; ++i) {
           var elementId = inputchildren[i].id;
@@ -132,44 +131,41 @@
             $('#' + elementId).focus();
             return false;
           }
-          //3번
-          if (elementId === 'rank' && !isRanker(elementValue)) {
-            alert('이미 등록된 랭킹은 중복될 수 없습니다.');
-            $('#rank').focus();
-            return false;
-          }
         }
         //2번
-        var array = ['New York', 'San Francisco', 'London'];
-        for (var i = 0; i < array.length; ++i) {
-          if ($('#loc').val() === array[0]) {
-            return true;
-          }
-          if ($('#loc').val() === array[1]) {
-            return true;
-          }
-          if ($('#loc').val() === array[2]) {
-            return true;
-          } else {
-            alert('New York, San Francisco, London 중에 입력하여 주세요!');
-            return false;
-          }
+        if (elementId === 'loc' && !isDeptName(elementValue)) {
+          alert('Office는 New York, San Francisco, London 중에선택해주세요!');
+          return false;
         }
-        setTableBody();
+        //3번
+        if (elementId === 'rank' && !isrank(elementValue)) {
+          alert('랭크는 중복이 안됍니다!');
+          return false;
+        }
+        //4번
+        appendTobody();
+      });
+      function isDeptName(dname) {
+        const DEPT_NAME = ['New York', 'San Francisco', 'London'];
+        var isCheck = false;
+        DEPT_NAME.forEach(function (element) {
+          if (element === dname) ischeck = true;
+        });
+        return ischeck;
       }
-      function isRanker(rank) {
+      function isrank(rank) {
         var isRanker = true;
-        var tbodyChildren = $('tbody').children();
-        for (var i = 0; i < tbodyChildren.length; i++) {
-          var firstTdElement = tbodyChildren[i].children[0];
-          var registeredRank = firstTdElement.innerText;
-          if (registeredRank === rank) {
+        var tbodyChildren = $('tobdy').children();
+        for (var i = 0; i < tbodyChildren.length; ++i) {
+          var firstTdElemnet = tbodyChildren[i].chldren[0];
+          var registereRank = firstTdElemnet.innerText;
+          if (registereRank === rank) {
             isRanker = false;
           }
         }
         return isRanker;
       }
-      function setTableBody() {
+      function appendTobody() {
         var rank = $('#rank').val().trim();
         var name = $('#name').val().trim();
         var job = $('#job').val().trim();

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<div class="forms">
+    <input type="text" id="name" value='강인석'>
+    <input type="text" id="hobby" value="게임">
+</div>
+<body>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"
+  ></script>
+  <script>
+      var formsChildren = $('.forms').children();
+      var jsonData = {};
+      for(var i=0; i< formsChildren.length; ++i){
+        var inputId= formsChildren[i].id
+        var inputvalue = $('#'+inputId).val();
+        jsonData[inputId] = inputvalue
+      }
+      submitSuver(jsonData)
+      
+
+      function submitSuver(jsonData){
+          //서버에 보내는 로직 구현
+          //param 변수를 서버에 보내자
+          console.log(jsonData)
+      }
+  </script>
+</body>
+</html>

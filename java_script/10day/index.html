@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="forms">
+      <div class="input-box">
+        <input id="email" type="text" />
+      </div>
+      <div class="input-box">
+        <input id="name" type="text" />
+      </div>
+      <div class="input-box">
+        <input id="phone" type="text" />
+      </div>
+      <div class="input-box">
+        <input id="addr" type="text" />
+      </div>
+      <div class="input-box">
+        <input id="age" type="text" />
+      </div>
+      <button type="button" class="join">회원가입</button>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      var count = 0;
+      $('.join').on('click', function () {
+        if (count >= 3) {
+          $('.join').off('click');
+          alert(
+            '회원가입정보란 기입을 3번틀리셔서 오늘은 더이상 불가능합니다.',
+          );
+          return false;
+        }
+        var jsonData = {};
+        var formschildren = $('.forms').children();
+        var inputBoxChildren = $('.input-box').children();
+        //*div class가 이름이 동일하기떄문에 칠드런배열로 담아짐.
+        for (var i = 0; i < inputBoxChildren.length; ++i) {
+          var elementId = inputBoxChildren[i].id;
+          var elementValue = $('#' + elementId)
+            .val()
+            .trim();
+          if (elementValue === '') {
+            alert('빈칸이 있어요');
+            $('#' + elementId).focus;
+            count += 1;
+            return false;
+          }
+          if (elementId === 'email' && !doCheckEmail(elementValue)) {
+            alert('이메일 형식이 다릅니다!');
+            $('#' + elementId).focus;
+            count += 1;
+            return false;
+          }
+          if (elementId === 'phone' && !fn_submit(elementValue)) {
+            alert('핸드폰번호가다릅니다!');
+            $('#' + elementId).focus;
+            count += 1;
+            return false;
+          }
+          jsonData[elementId] = elementValue;
+        } //end for
+        doJsonData(jsonData);
+      });
+      function doCheckEmail(email) {
+        var regEmail =
+          /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        isEmail = regEmail.test(email);
+        return isEmail; //return type : boolean
+      }
+      function fn_submit(phone) {
+        var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+        isPhone = regPhone.test(phone);
+        return isPhone;
+      }
+      function doJsonData(jsonData) {
+        console.log(jsonData);
+      }
+    </script>
+  </body>
+</html>

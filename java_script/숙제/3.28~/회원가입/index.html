@@ -84,17 +84,18 @@
                 $('#' +elementID).focus;
                 return false;
               }
-              if((formWrapper[i].id ==='userName'|| formWrapper[i].id ==='nickname') 
+            if((formWrapper[i].id ==='userName'|| formWrapper[i].id ==='nickname') 
               && elementValue.length >=20){
-                alert('20글자 제한')
-                return false;
-              }
-              // if((formWrapper[i].id ==='userName'|| formWrapper[i].id ==='nickname') 
-              // && !isUsercheck(elementValue)){
-              //   alert('닉네임과 이름은 한글이어야합니다')
-              //   $('#' +elementID).focus;
-              //   return false;
-              // }
+                alert('회원이름과 닉네임은 20글자 이하고 한글만 사용할 수 있습니다.')
+                 $('#' +elementID).focus;
+                 return false;
+            }
+            if((formWrapper[i].id ==='userName'|| formWrapper[i].id ==='nickname')&&!checkNames(elementValue)){
+                 alert('닉네임과 이름은 한글이어야합니다')
+                 $('#userName').focus;
+                 $('#nickname').focus;
+                 return false;
+            }
               if(formWrapper[i].id === 'phone'){
                 elementValue = elementValue.replaceAll('-','');
               }
@@ -116,10 +117,9 @@
           jsonparam.email = userEmail+'@'+emailCompany;
           doJoin(jsonparam);
         })
-        function isUsercheck(userName) {
+        function checkNames(name) {
         var Regex = /^[가-힣]+$/;
-        isuser = Regex.test(name);
-        return isuser;
+        return  Regex.test(name);
       }
       function doJoin(jsonparam){
         console.log(jsonparam);

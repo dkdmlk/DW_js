@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="my-gitbub">
+      <h3 class="name"></h3>
+      <p class="followers"></p>
+      <p class="following"></p>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>name</th>
+          <th>visobility</th>
+          <th>craated_at</th>
+        </tr>
+      </thead>
+      <tbody id="list"></tbody>
+    </table>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      //전송!~(동기전송,비동기전송)
+      //ajax default value : 비동기전송
+      $.ajax({
+        url: 'https://api.github.com/users/dkdmlk',
+        type: 'GET', //select데이터조회
+        dataType: 'json', //API서버에서 오는 데이터 타입정의
+        success: function (data) {
+          console.log(data);
+          console.log('followers : ' + data.followers);
+          console.log('following : ' + data.following);
+          $('.followers').append(data.followers);
+          $('.following').append(data.following);
+          $('.name').append(data.name);
+        },
+        error: function (request, status, error) {
+          /*
+            error 404:없는주소
+            error 500:서버 내부결함(에러)
+            error 403: 권한*/
+          console.log(error);
+          if (request.status == 404) {
+            alert('없는주소입니다.');
+          }
+        },
+      }); //ajax선언
+      $.ajax({
+        url: 'https://api.github.com/users/dkdmlk/repos',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+          console.log(data);
+          for (var i = 0; i < data.length; ++i) {
+            var html =
+              '<tr><td>' +
+              data[i].id +
+              '</td><td>' +
+              data[i].name +
+              '</td><td>' +
+              data[i].visibility +
+              '</td><td>' +
+              data[i].created_at +
+              '</td></tr>';
+            $('#list').append(html);
+          }
+        },
+        error: function (request, status, error) {
+          console.log(error);
+        },
+      });
+    </script>
+  </body>
+</html>

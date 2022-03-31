@@ -51,8 +51,8 @@
             .trim();
           if (elementValue === '') {
             alert('빈칸이 있어요');
-            $('#' + elementId).focus;
             count += 1;
+            $('#' + elementID).focus();
             return false;
           }
           if (elementId === 'email' && !doCheckEmail(elementValue)) {

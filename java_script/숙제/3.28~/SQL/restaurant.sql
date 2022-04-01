@@ -11,14 +11,14 @@ CREATE TABLE restaurant(
     foodNo INTEGER(4) NOT NULL COMMENT '음식 번호',
     FOREIGN KEY(foodNo) REFERENCES food(foodNo)
 );
-
+-- Fk는 index를 하여 목차를줘야한다.
 SELECT * FROM restaurant WHERE foodNo = 30 AND restaurantName= '빠스타스';
 /* 문제 1.
 레스토랑 테이블에 데이터가 일일 1000만건 저장된다. 
 레스토랑 테이블에서 위에 작성한 select쿼리 호출 시간이 오래 걸리기 시작했다.
 가장 먼저해야하는 바람직한 행동은?
 답안 작성 =>
-추가하여 나눌수 있는 모델링이 있는지 찾아본다(관계형데이터 모델링으로)나눌수있는지본다.
+foodNo에 index를 해야한다.
 */
 
 DELETE FROM food

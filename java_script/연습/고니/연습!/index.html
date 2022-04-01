@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table,
+      tr,
+      th,
+      td,
+      tr {
+        border: solid 1px;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+      }
+      input {
+        width: 400px;
+        height: auto;
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Id</th>
+          <th>Email</th>
+          <th>Age</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody id="list">
+        <tr>
+          <th>홍길동</th>
+          <th>ghdrlfehd12</th>
+          <th>ghdrlfehd12@hanmail.net</th>
+          <th>30</th>
+          <th>010-0000-9955</th>
+        </tr>
+      </tbody>
+    </table>
+    <div class="container">
+      <input type="text" id="name" placeholder="이름을 입력해주세요!" />
+      <input type="text" id="id" placeholder="Id을 입력해주세요!" />
+      <input type="text" id="email" placeholder="이메일 을 입력해주세요!" />
+      <input
+        type="text"
+        id="age"
+        placeholder="나이를 입력해주세요!"
+        maxlength="2"
+      />
+      <input type="text" id="phone" placeholder="핸드폰번호를 입력해주세요!" />
+    </div>
+    <button type="button" id="btn">입력!</button>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $('#btn').on('click', function () {
+        var jsonData = {};
+        var element = $('.container').children();
+        for (var i = 0; i < element.length; ++i) {
+          var elementId = element[i].id;
+          var elementValue = $('#' + element[i].id)
+            .val()
+            .trim();
+          if (elementValue === '') {
+            alert('데이터를 입력해 주세요!');
+            $('#' + element[i].id).focus();
+            return false;
+          }
+          if (elementId === 'name' && !checkKorean(elementValue)) {
+            alert('이름은 한글로 작성해주세요!');
+            $('#name').focus();
+            return false;
+          }
+          if (elementId === 'id' && !checkId(elementValue)) {
+            alert('id는 영어로 작성해주세요!');
+            $('#id').focus();
+            return false;
+          }
+          if (elementId === 'email' && !checkemail(elementValue)) {
+            alert('이메일 양식이 틀리셧습니다!');
+            $('#email').focus();
+            return false;
+          }
+          if (elementId === 'age' && !chkeckAge(elementValue)) {
+            alert('나이는 숫자로만 입력해주세요!');
+            $('#age').focus();
+            return false;
+          }
+          if (elementId === 'phone' && !checkPho(elementValue)) {
+            alert('전화번호는 000-000(0)-0000 형태로 입력해주세요!');
+            $('#phone').focus();
+            return false;
+          }
+          jsonData[elementId] = elementValue;
+        }
+        doSubmitJson(jsonData);
+        dovalue();
+      });
+      function checkKorean(name) {
+        var rax = /^[가-힣\s]+$/;
+        isKorean = rax.test(name);
+        return isKorean;
+      }
+      function checkId(id) {
+        var raxi = /^[a-zA-Z]+$/;
+        isId = raxi.test(id);
+        return isId;
+      }
+      function checkemail(email) {
+        var raxe =
+          /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+        isEamil = raxe.test(email);
+        return isEamil;
+      }
+      function chkeckAge(age) {
+        var raxa = /^[0-9]+$/;
+        isAge = raxa.test(age);
+        return isAge;
+      }
+      function checkPho(phone) {
+        var raxp = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
+        ispho = raxp.test(phone);
+        return ispho;
+      }
+      function dovalue() {
+        var name = $('#name').val().trim();
+        var id = $('#id').val().trim();
+        var email = $('#email').val().trim();
+        var age = $('#age').val().trim();
+        var pho = $('#phone').val().trim();
+        var html =
+          '<tr><td>' +
+          name +
+          '</td><td>' +
+          id +
+          '</td><td>' +
+          email +
+          '</td><td>' +
+          age +
+          '</td><td>' +
+          pho +
+          '</td></tr>';
+        $('#list').append(html);
+      }
+      function doSubmitJson(jsonData) {
+        console.log(jsonData);
+      }
+    </script>
+  </body>
+</html>
